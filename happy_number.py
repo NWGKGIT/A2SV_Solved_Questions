@@ -1,15 +1,15 @@
 class Solution:
-    def isHappy(self,n):
+    def isHappy(self, n: int) -> bool:
         seen = set()
-        while n != 1:
-            possible = 0
-            for i in str(n):
-                possible += int(i) ** 2
-            if possible in seen:
-                return False
-            seen.add(possible)
-            n = possible
-        return True
-
-            
-        
+        while n != 1 and n not in seen:
+            seen.add(n)
+            n = self.get_next(n)
+        return n == 1
+    
+    def get_next(self, n: int) -> int:
+        total_sum = 0
+        while n > 0:
+            digit = n % 10
+            total_sum += digit ** 2
+            n //= 10
+        return total_sum
