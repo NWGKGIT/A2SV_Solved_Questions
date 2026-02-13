@@ -1,21 +1,27 @@
 import random
+
+
 class RandomizedSet:
-
     def __init__(self):
-        self.someset=set()
+        self.data_hash_map = {}
+        self.data_list = []
 
-    def insert(self, val: int) -> bool:
-        if val not in self.someset:
-            self.someset.add(val)
-            return True
-        else:
+    def insert(self, val):
+        if val in self.data_hash_map:
             return False
-    def remove(self, val: int) -> bool:
-        if val in self.someset:
-            self.someset.remove(val)
-            return True
-        else:
-            return False
+        self.data_hash_map[val] = len(self.data_list)
+        self.data_list.append(val)
+        return True
 
-    def getRandom(self) -> int:
-        return random.choice(list(self.someset)) # bottleneck here, will fix it at some point
+    def remove(self, val):
+        if val not in self.data_hash_map:
+            return False
+        to_be_deleted_idx = self.data_hash_map[val]
+        self.data_list[to_be_deleted_idx] = self.data_list[-1]
+
+        self.data_hash_map[self.data_list[-1]] = to_be_deleted_idx
+        self.data_list.pop()
+        del self.data_hash_map[val]
+        return True
+    def get_random(self):
+        return random.choice(self.data_list)
