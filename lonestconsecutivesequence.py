@@ -1,6 +1,6 @@
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        numSet =set(nums)
+        numSet=set(nums)
         longest=0
         
         for num in numSet:
@@ -9,7 +9,7 @@ class Solution:
                 length=0
                 while (num+length in numSet):
                     length+=1
-                    longest=max(length,longest)
-        return max(length, longest)
+                longest=max(length,longest)
+        return longest
                 
             
