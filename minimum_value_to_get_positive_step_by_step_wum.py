@@ -1,0 +1,7 @@
+class Solution:
+    def minStartValue(self, nums: List[int]) -> int:
+        Sum, ans = 0, 0
+        for el in nums:
+            Sum = Sum + el
+            ans = min(ans, Sum)
+        return -ans + 1
